@@ -9,36 +9,76 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using Paytime.Models;
+using Paytime.Services;
+using Paytime.Models.ViewModel;
 
 namespace Paytime.Controllers.Api
 {
     public class AuditsController : ApiController
     {
         private PaytimeDbContext db = new PaytimeDbContext();
+        private AuditService _auditService = new AuditService();
 
         // GET: api/Audits
-        public IQueryable<Audit> GetAudits()
+        public IEnumerable<AuditViewModel> GetAudits()
         {
-            return db.Audits;
+            return _auditService.GetAudits();
         }
 
         // GET: api/Audits/5
-        [ResponseType(typeof(Audit))]
+        [ResponseType(typeof(AuditViewModel))]
         public IHttpActionResult GetAudit(int id)
         {
-            Audit audit = db.Audits.Find(id);
-            if (audit == null)
+            //Audit audit = db.Audits.Find(id);
+            //if (audit == null)
+            //{
+            //    return NotFound();
+            //}
+
+            //return Ok(audit);
+
+            var response = _auditService.GetAuditById(id);
+            if (response == null)
             {
                 return NotFound();
             }
-
-            return Ok(audit);
+            return Ok(response);
         }
 
         // PUT: api/Audits/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutAudit(int id, Audit audit)
+        public IHttpActionResult PutAudit(int id, AuditViewModel audit)
         {
+            //if (!ModelState.IsValid)
+            //{
+            //    return BadRequest(ModelState);
+            //}
+
+            //if (id != audit.Id)
+            //{
+            //    return BadRequest();
+            //}
+
+            //db.Entry(audit).State = EntityState.Modified;
+
+            //try
+            //{
+            //    db.SaveChanges();
+            //}
+            //catch (DbUpdateConcurrencyException)
+            //{
+            //    if (!AuditExists(id))
+            //    {
+            //        return NotFound();
+            //    }
+            //    else
+            //    {
+            //        throw;
+            //    }
+            //}
+
+            //return StatusCode(HttpStatusCode.NoContent);
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -49,56 +89,67 @@ namespace Paytime.Controllers.Api
                 return BadRequest();
             }
 
-            db.Entry(audit).State = EntityState.Modified;
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
             try
             {
-                db.SaveChanges();
+                var r = _auditService.AddUpdateAudit(audit);
+                return Ok(r);
             }
-            catch (DbUpdateConcurrencyException)
+            catch (Exception e)
             {
-                if (!AuditExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                return StatusCode(HttpStatusCode.NoContent);
             }
-
-            return StatusCode(HttpStatusCode.NoContent);
         }
 
         // POST: api/Audits
-        [ResponseType(typeof(Audit))]
-        public IHttpActionResult PostAudit(Audit audit)
+        [ResponseType(typeof(AuditViewModel))]
+        public IHttpActionResult PostAudit(AuditViewModel audit)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.Audits.Add(audit);
-            db.SaveChanges();
+            var r = _auditService.AddUpdateAudit(audit);
 
-            return CreatedAtRoute("DefaultApi", new { id = audit.Id }, audit);
+            return CreatedAtRoute("DefaultApi", new { id = r }, audit);
+
+            //if (!ModelState.IsValid)
+            //{
+            //    return BadRequest(ModelState);
+            //}
+
+            //db.Audits.Add(audit);
+            //db.SaveChanges();
+
+            //return CreatedAtRoute("DefaultApi", new { id = audit.Id }, audit);
         }
 
         // DELETE: api/Audits/5
-        [ResponseType(typeof(Audit))]
+        [ResponseType(typeof(AuditViewModel))]
         public IHttpActionResult DeleteAudit(int id)
         {
-            Audit audit = db.Audits.Find(id);
-            if (audit == null)
+            int r = _auditService.DeleteAudit(id);
+            if (r == 0)
             {
                 return NotFound();
             }
+            return Ok(r);
 
-            db.Audits.Remove(audit);
-            db.SaveChanges();
+            //Audit audit = db.Audits.Find(id);
+            //if (audit == null)
+            //{
+            //    return NotFound();
+            //}
 
-            return Ok(audit);
+            //db.Audits.Remove(audit);
+            //db.SaveChanges();
+
+            //return Ok(audit);
         }
 
         protected override void Dispose(bool disposing)

@@ -1,0 +1,82 @@
+﻿<div>
+    <div class="form-group">
+        <div ng-class="submitStatus.flag ? 'alert alert-success alert-dismissible fade in' : 'alert alert-danger alert-dismissible fade in'" class="" role="alert" ng-show="submitStatus.display">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close" ng-click="closeSubmitStatusAlert()">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            {{ submitStatus.message }}
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">{{ pageType }}</h3>
+        </div>
+        <div class="panel-body">
+            <form name="uno" novalidate>
+                <div class="form-group">
+                    <label for="shortUrl">Title</label>
+                    <input type="text" name="titleInput" class="form-control" id="title" placeholder="Title of the event" ng-model="title" ng-minlength="3" ng-maxlength="20" ng-required="true">
+                    <div ng-show="uno.titleInput.$touched && uno.titleInput.$invalid && !uno.titleInput.$pristine">
+                        <div class="text-danger text-muted">There seems to be an error with the short url you entered. Try something between 3 to 20 characters.</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="shortDescription">Short Description</label>
+                    <input type="text" name="shortDescriptionInput" class="form-control" id="shortDescription" placeholder="shortDescriptionInput" ng-model="shortDescription" ng-minlength="3"  ng-required="true">
+                    <div ng-show="uno.shortDescriptionInput.$touched && uno.shortDescriptionInput.$invalid && !uno.shortDescriptionInput.$pristine">
+                        <div class="text-danger text-muted">There seems to be an error with the short url you entered. Try something between 3 to 20 characters.</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="longDescription">long Description</label>
+                    <input type="text" name="longDescriptionInput" class="form-control" id="longDescription" placeholder="longDescriptionInput" ng-model="longDescription" ng-minlength="3"  ng-required="true">
+                    <div ng-show="uno.longDescriptionInput.$touched && uno.longDescriptionInput.$invalid && !uno.longDescriptionInput.$pristine">
+                        <div class="text-danger text-muted">There seems to be an error with the long url you entered. Try something between 3 to 20 characters.</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="startDate">Start Date</label>
+                    <input type="text" name="startDateInput" class="form-control" id="startDate" placeholder="startDateInput" ng-model="startDate" ng-minlength="3" ng-required="true">
+                    <div ng-show="uno.startDateInput.$touched && uno.startDateInput.$invalid && !uno.startDateInput.$pristine">
+                        <div class="text-danger text-muted">There seems to be an error with the long url you entered. Try something between 3 to 20 characters.</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="endDate">End Date</label>
+                    <input type="text" name="endDateInput" class="form-control" id="endDate" placeholder="endDateInput" ng-model="endDate" ng-minlength="3" ng-required="true">
+                    <div ng-show="uno.endDateInput.$touched && uno.endDateInput.$invalid && !uno.endDateInput.$pristine">
+                        <div class="text-danger text-muted">There seems to be an error with the long url you entered. Try something between 3 to 20 characters.</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="recurrenceRule">Recurrence Rule</label>
+                    <input type="text" name="recurrenceRuleInput" class="form-control" id="recurrenceRule" placeholder="recurrenceRuleInput" ng-model="recurrenceRule" ng-minlength="3" ng-required="true">
+                    <div ng-show="uno.recurrenceRuleInput.$touched && uno.recurrenceRuleInput.$invalid && !uno.recurrenceRuleInput.$pristine">
+                        <div class="text-danger text-muted">There seems to be an error with the long url you entered. Try something between 3 to 20 characters.</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="radio-inline"><input type="radio" name="reminderMode" ng-model="reminderMode" value="Mobile Only">Mobile Only</label>
+                    <label class="radio-inline"><input type="radio" name="reminderMode" ng-model="reminderMode" value="Email Only">Email Only</label>
+                    <label class="radio-inline"><input type="radio" name="reminderMode" ng-model="reminderMode" value="Mobile and Email">Mobile and Email</label> 
+                </div>
+                <!--<div ng-show="uno.$invalid && !uno.$pristine">
+                    <div class="text-danger text-muted">There seems to be an error with the long url you entered. Try something between 3 to 20 characters.</div>
+                </div>-->
+                <div class="form-group">
+                    <button type="submit" class="btn btn-success" ng-click="addRecord(pageType)" ng-disabled="uno.$invalid || !isAdmin"><i class="ion-ios-compose-outline"></i>&nbsp;{{ pageType }}</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div ng-show="pageType==='Edit'">
+        <div class="panel panel-danger">
+            <div class="panel-heading">
+                <h3 class="panel-title">Are you sure you want to delete this mapping?</h3>
+            </div>
+            <div class="panel-body">
+                <button class="btn btn-danger" ng-click="deleteRecord()" ng-disabled="!isAdmin"><i class="ion-ios-trash-outline"></i>&nbsp;Yes, I want to delete this</button>
+            </div>
+        </div>
+    </div>
+</div>

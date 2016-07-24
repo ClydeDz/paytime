@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace Paytime.Models
 {
@@ -9,7 +10,9 @@ namespace Paytime.Models
         public string ShortDescription { get; set; }
         public string LongDescription { get; set; }
         public string RecurrenceRule { get; set; }
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime StartDate { get; set; }
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public Nullable<DateTime> EndDate { get; set; }
         public ReminderType ReminderMode { get; set; }
         public DateTime CreatedOn { get; set; }
@@ -18,8 +21,8 @@ namespace Paytime.Models
 
     public enum ReminderType
     {
-        MobileOnly = 0,
-        EmailOnly = 1,
-        MobileAndEmail =2
+        Mobile_Only = 0,
+        Email_Only = 1,
+        Mobile_and_Email =2
     }
 }

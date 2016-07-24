@@ -1,0 +1,49 @@
+﻿@model Paytime.Models.ViewModel.AuditViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    ViewBag.Title = "Events";
+
+}
+<div ng-app="paytime">
+    <div class="jumbotron">
+        <h1>Paytime</h1>
+        <p>Reminds you when its on-time to make a payment.</p>
+        @*<p class="lead"></p>*@<br />
+        <p>
+            <a href="#/" class="btn btn-primary"><i class="ion-ios-drag"></i>&nbsp;List</a>
+            <a href="#/add" class="btn btn-primary"><i class="ion-ios-plus-empty"></i>&nbsp;Add</a>
+        </p>
+    </div>
+    <div ng-view></div>
+    <br />
+    <div class="container">
+        <h2>Audit</h2>
+        <div class="row">
+            <div class="col-xs-12 col-md-12">
+                <b>Status: </b>@Model.Status.ToString()
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-md-12">
+                <b>Last Run: </b>@Model.LastModifiedOn.ToString()
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-md-12">
+                <b>Comments: </b>@Model.Comments.ToString()
+            </div>
+        </div>
+    </div>
+    <div></div>
+</div>
+@section Scripts{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.4/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.4/angular-route.min.js"></script>
+    <script src="~/Scripts/js/app.js"></script>
+    <script src="~/Scripts/js/appController.js"></script>
+    <script src="~/scripts/js/datetime-picker.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/1.2.0/ui-bootstrap-tpls.js"></script>
+}
+

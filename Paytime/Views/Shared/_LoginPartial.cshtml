@@ -1,0 +1,21 @@
+﻿
+@if (Request.IsAuthenticated)
+{
+    <text>
+        <ul class="nav navbar-nav navbar-right">
+            <li class="user-email">
+                <i class="ion-ios-person-outline"></i>&nbsp;@((User.Identity.Name).Split('#')[1].ToString())
+            </li>
+            <li>
+                <a href="@Url.Action("SignOut", "Account")"><i class="ion-log-out"></i> Sign out</a>
+            </li>
+        </ul>
+    </text>
+}
+else
+{
+    <ul class="nav navbar-nav navbar-right">
+        <li>
+            <a href="@Url.Action("SignIn", "Account")" id="loginLink"><i class="ion-log-in"></i> Sign in</a>
+    </ul>
+}

@@ -6,5 +6,7 @@ namespace Paytime.Models
     {
         public int Id { get; set; }
         public DateTime LastModifiedOn { get; set; }
+        public string Comments { get; set; }
+        public string Status { get; set; }
     }
 }

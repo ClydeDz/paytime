@@ -1,0 +1,34 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+@media(max-width:749px){
+    .user-email{
+         color:white;
+         margin-left:13px;
+         margin-top:14px;
+         margin-bottom:7px;
+    }
+}
+@media(min-width:750px){
+    .user-email{
+         color:white;
+         margin-left:13px;
+         margin-top:14px;
+         margin-bottom:7px;
+    }
+}
