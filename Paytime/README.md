@@ -1,6 +1,7 @@
 #Paytime
+##A payment reminder app
 
-Add PrivateSettings.config file with the following format
+The application needs two config files to be added to the root directory as follows. Add `PrivateSettings.config` file with the following format
 
 ```
 <appSettings>
@@ -22,7 +23,7 @@ Add PrivateSettings.config file with the following format
   <add key="paytime:ReminderMinute" value="00" />
 </appSettings>
 ```
-And add SecureDbConnection.config with the below settings
+And add `SecureDbConnection.config` with the below settings
 
 ```
 <connectionStrings>
@@ -30,3 +31,4 @@ And add SecureDbConnection.config with the below settings
   <add name="PaytimeAzureDbContext" connectionString="\[connectionString\]" />
 </connectionStrings>
 ```
+
