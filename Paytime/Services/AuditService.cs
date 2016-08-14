@@ -58,10 +58,11 @@ namespace Paytime.Services
         #region POST
         public int AddAudit(AuditViewModel auditViewModel)
         {
+            var localDateTime = GetNZLocalTime();
             var entity = new Audit();
             entity.Comments = auditViewModel.Comments;
             entity.Status = auditViewModel.Status;
-            entity.LastModifiedOn = System.DateTime.Now;
+            entity.LastModifiedOn = localDateTime;
             var x = db.Audits.Add(entity);
             db.SaveChanges();          
             return x.Id;
@@ -72,12 +73,13 @@ namespace Paytime.Services
         #region PUT
         public int UpdateAudit(AuditViewModel auditViewModel)
         {
+            var localDateTime = GetNZLocalTime();
             var entity = db.Audits.SingleOrDefault(b => b.Id == auditViewModel.Id);
             if (entity != null)
             {
                 entity.Comments = auditViewModel.Comments;
                 entity.Status = auditViewModel.Status;
-                entity.LastModifiedOn = System.DateTime.Now;
+                entity.LastModifiedOn = localDateTime;
                 db.SaveChanges();
             }
             return entity.Id;
@@ -95,6 +97,18 @@ namespace Paytime.Services
             var r = db.Audits.Remove(entity);
             db.SaveChanges();
             return r.Id;
+        }
+        #endregion
+
+        #region
+        private DateTime GetNZLocalTime()
+        {
+            string date = System.DateTime.Now.ToString();
+            DateTime localDateTime = DateTime.Parse(date);
+            DateTime utcDateTime = localDateTime.ToUniversalTime();
+            string nzTimeZoneKey = "New Zealand Standard Time";
+            TimeZoneInfo nzTimeZone = TimeZoneInfo.FindSystemTimeZoneById(nzTimeZoneKey);
+            return TimeZoneInfo.ConvertTimeFromUtc(utcDateTime, nzTimeZone);
         }
         #endregion
 

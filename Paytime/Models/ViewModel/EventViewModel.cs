@@ -13,9 +13,9 @@ namespace Paytime.Models.ViewModel
         public string ShortDescription { get; set; }
         public string LongDescription { get; set; }
         public string RecurrenceRule { get; set; }
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
         public string StartDate { get; set; }
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
         public string EndDate { get; set; }
         public string ReminderMode { get; set; }
         public string CreatedOn { get; set; }

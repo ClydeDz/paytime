@@ -1,7 +1,7 @@
 ﻿/*
    Creating a new module
 */
-angular.module("paytime", ['ngRoute', 'ui.bootstrap', 'ui.bootstrap.datetimepicker']);
+angular.module("paytime", ['ngRoute', 'kendo.directives']);
 
 /*
     Configuration

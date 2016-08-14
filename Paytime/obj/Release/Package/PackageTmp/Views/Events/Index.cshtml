@@ -6,34 +6,39 @@
     ViewBag.Title = "Events";
 
 }
+@section CustomCss{
+    <link href="http://kendo.cdn.telerik.com/2016.2.714/styles/kendo.common-bootstrap.min.css" rel="stylesheet" />
+    <link href="http://kendo.cdn.telerik.com/2016.2.714/styles/kendo.bootstrap.min.css" rel="stylesheet" />  
+    <link href="http://kendo.cdn.telerik.com/2016.2.714/styles/kendo.bootstrap.mobile.min.css" rel="stylesheet" /> 
+}
 <div ng-app="paytime">
-    <div class="jumbotron">
-        <h1>Paytime</h1>
-        <p>Reminds you when its on-time to make a payment.</p>
-        @*<p class="lead"></p>*@<br />
-        <p>
-            <a href="#/" class="btn btn-primary"><i class="ion-ios-drag"></i>&nbsp;List</a>
-            <a href="#/add" class="btn btn-primary"><i class="ion-ios-plus-empty"></i>&nbsp;Add</a>
-        </p>
+    <div class="row inner-body">
+        <div class="col-xs-12">
+            <h2>Events</h2>
+            <p>
+                This is where you see the events that you have added, edit them or even add a new event.
+            </p>
+        </div>
     </div>
     <div ng-view></div>
     <br />
-    <div class="container">
-        <h2>Audit</h2>
-        <div class="row">
-            <div class="col-xs-12 col-md-12">
-                <b>Status: </b>@Model.Status.ToString()
-            </div>
+    <div class="row inner-body">
+        <div class="col-xs-12 col-md-4">
+            <h2>Logs</h2>
         </div>
-        <div class="row">
-            <div class="col-xs-12 col-md-12">
-                <b>Last Run: </b>@Model.LastModifiedOn.ToString()
-            </div>
+    </div>
+    <div class="row inner-body">        
+        <div class="col-xs-12 col-md-12">
+            @if(Model.Status.ToString().ToLower() == "up")
+            { <b>Status: </b><span class="label label-success">@Model.Status.ToString() </span> }
+            else
+            { <b>Status: </b><span class="label label-danger">@Model.Status.ToString() </span> }            
         </div>
-        <div class="row">
-            <div class="col-xs-12 col-md-12">
-                <b>Comments: </b>@Model.Comments.ToString()
-            </div>
+        <div class="col-xs-12 col-md-12">
+            <b>Last Run: </b>@Model.LastModifiedOn.ToString()
+        </div>
+        <div class="col-xs-12 col-md-12">
+            <b>Comments: </b>@Model.Comments.ToString()
         </div>
     </div>
     <div></div>
@@ -43,7 +48,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.4/angular-route.min.js"></script>
     <script src="~/Scripts/js/app.js"></script>
     <script src="~/Scripts/js/appController.js"></script>
-    <script src="~/scripts/js/datetime-picker.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/1.2.0/ui-bootstrap-tpls.js"></script>
+    <script src="http://kendo.cdn.telerik.com/2016.2.714/js/kendo.all.min.js"></script>
 }
 

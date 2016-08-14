@@ -1,5 +1,13 @@
-﻿
-@if (Request.IsAuthenticated)
+﻿    @if (Request.IsAuthenticated)
+    {
+         <a href="@Url.Action("SignOut", "Account")" data-toggle="tooltip" data-placement="left" title="Log out"><i class="ion-log-out" style="position: fixed;bottom: 10px;right: 10px;"></i></a>
+    }
+    else
+    {
+        <a href="@Url.Action("SignIn", "Account")" id="loginLink" data-toggle="tooltip" data-placement="left" title="Log in"><i class="ion-log-in" style="position: fixed;bottom: 10px;right: 10px;"></i></a>
+    }
+
+@*@if (Request.IsAuthenticated)
 {
     <text>
         <ul class="nav navbar-nav navbar-right">
@@ -18,4 +26,4 @@ else
         <li>
             <a href="@Url.Action("SignIn", "Account")" id="loginLink"><i class="ion-log-in"></i> Sign in</a>
     </ul>
-}
+}*@

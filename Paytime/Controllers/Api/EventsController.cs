@@ -87,14 +87,20 @@ namespace Paytime.Controllers.Api
             {
                 return BadRequest(ModelState);
             }
+            try
+            {
+                var r = _eventsService.AddUpdateEvent(eventViewModel);
 
-            var r = _eventsService.AddUpdateEvent(eventViewModel);
+                //return 
+                //db.Events.Add(@event);
+                //db.SaveChanges();
 
-            //return 
-            //db.Events.Add(@event);
-            //db.SaveChanges();
-
-            return CreatedAtRoute("DefaultApi", new { id = r }, eventViewModel);
+                return CreatedAtRoute("DefaultApi", new { id = r }, eventViewModel);
+            }
+            catch(Exception e)
+            {
+                return BadRequest(""+e.InnerException);
+            }            
         }
 
         // DELETE: api/Events/5

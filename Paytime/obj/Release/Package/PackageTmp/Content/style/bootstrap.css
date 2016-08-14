@@ -1,3 +1,14 @@
+/* NUGET: BEGIN LICENSE TEXT
+ *
+ * Microsoft grants you the right to use these script files for the sole
+ * purpose of either: (i) interacting through your browser with the Microsoft
+ * website or online service, subject to the applicable licensing or use
+ * terms; or (ii) using the files as included with a Microsoft product subject
+ * to that product's license terms. Microsoft reserves all other rights to the
+ * files not expressly granted by Microsoft, whether by implication, estoppel
+ * or otherwise. The notices and licenses below are for informational purposes only.
+ *
+ * NUGET: END LICENSE TEXT */
 /*!
  * Bootstrap v3.0.0
  *
@@ -84,9 +95,8 @@ hr {
 }
 
 mark {
-  color: #353535;
-  font-weight:500;
-  background:#FDFFB2;
+  color: #000;
+  background: #ff0;
 }
 
 code,
@@ -304,7 +314,7 @@ body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 14px;
   line-height: 1.428571429;
-  color: #505050;
+  color: #333333;
   background-color: #ffffff;
 }
 
@@ -511,7 +521,7 @@ h2,
 
 h3,
 .h3 {
-  font-size: 26px;
+  font-size: 24px;
 }
 
 h4,
@@ -2080,11 +2090,10 @@ fieldset[disabled] .btn-default.active {
 }
 
 .btn-primary {
-    color: #ffffff;
-    background-color: #0095a5;
-    border-color: #0095a5;
+  color: #ffffff;
+  background-color: #428bca;
+  border-color: #357ebd;
 }
-
 
 .btn-primary:hover,
 .btn-primary:focus,
@@ -2092,8 +2101,8 @@ fieldset[disabled] .btn-default.active {
 .btn-primary.active,
 .open .dropdown-toggle.btn-primary {
   color: #ffffff;
-  background-color: #08acbd;
-  border-color: #08acbd;
+  background-color: #3276b1;
+  border-color: #285e8e;
 }
 
 .btn-primary:active,
@@ -5996,7 +6005,6 @@ body.modal-open,
 
 .carousel {
   position: relative;
-  margin:30px auto 30px auto;
 }
 
 .carousel-inner {
@@ -6130,7 +6138,7 @@ body.modal-open,
 
 .carousel-indicators {
   position: absolute;
-  bottom: -50px;
+  bottom: 10px;
   left: 50%;
   z-index: 15;
   width: 60%;
@@ -6142,25 +6150,20 @@ body.modal-open,
 
 .carousel-indicators li {
   display: inline-block;
-  width: 15px;
-  height: 15px;
+  width: 10px;
+  height: 10px;
   margin: 1px;
   text-indent: -999px;
   cursor: pointer;
-  /*border: 0px solid #ffffff;*/
+  border: 1px solid #ffffff;
   border-radius: 10px;
-  background-color:#6C6C6C;
 }
 
 .carousel-indicators .active {
-  width: 15px;
-  height: 15px;
-  margin: 1px;
-  background-color: #F9D106;
-}
-
-.carousel-indicators li:hover, .carousel-indicators .active:hover{
-	opacity:0.5;
+  width: 12px;
+  height: 12px;
+  margin: 0;
+  background-color: #ffffff;
 }
 
 .carousel-caption {
@@ -6195,7 +6198,7 @@ body.modal-open,
     padding-bottom: 30px;
   }
   .carousel-indicators {
-    /*bottom: 20px;*/
+    bottom: 20px;
   }
 }
 
@@ -6579,10 +6582,6 @@ td.hidden-xs {
   td.hidden-xs.hidden-lg {
     display: none !important;
   }
-	/*CHANGE
-	#headerwrap h1{
-		font-size:150px;
-	}*/
 }
 
 .hidden-sm {

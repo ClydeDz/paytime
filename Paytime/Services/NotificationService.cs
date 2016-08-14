@@ -64,26 +64,9 @@ namespace Paytime.Services
             }
             catch (Exception ex)
             {
-                _emailService.SendEmail("Paytime email couldn't be sent", string.Format("Details of the exceptions are: \n{0}", ex.Message));
+                _emailService.SendEmail(new EmailViewModel() { Title= "Paytime notification couldn't be sent", Subject = "Paytime notification couldn't be sent", Body = string.Format("Details of the exceptions are: \n{0}", ex.Message), Footer = "Please look into this matter before the next notification cycle." });
                 _auditService.UpdateAudit(new AuditViewModel() { Status = "DOWN", Comments = string.Format("Exception occured.", _affectedEvents), Id = 1 });
             }
         }
     }
 }
-
-
-//string date = System.DateTime.Now.ToString();
-//// Local .NET timeZone.
-//DateTime localDateTime = DateTime.Parse(date);
-//DateTime utcDateTime = localDateTime.ToUniversalTime();
-//string nzTimeZoneKey = "New Zealand Standard Time";
-//TimeZoneInfo nzTimeZone = TimeZoneInfo.FindSystemTimeZoneById(nzTimeZoneKey);
-//DateTime nzDateTime = TimeZoneInfo.ConvertTimeFromUtc(utcDateTime, nzTimeZone);
-//String apiKey = "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";
-//dynamic sg = new SendGridAPIClient(apiKey);
-//Email from = new Email("clyd94@gmail.com");
-//String subject = "Email reminder by Paytime";
-//Email to = new Email("clyd94@gmail.com");
-//Content content = new Content("text/plain", "Email by Paytime sent using Hangfire background tasks. Timestamp: " + nzDateTime);
-//Mail mail = new Mail(from, subject, to, content);
-//dynamic response = sg.client.mail.send.post(requestBody: mail.Get());

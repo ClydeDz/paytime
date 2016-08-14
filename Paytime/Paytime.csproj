@@ -244,18 +244,25 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\style\bootstrap.css" />
+    <Content Include="Content\style\bootstrap.min.css" />
     <Content Include="Content\style\datetimepicker.css" />
     <Content Include="Content\Site.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Partials\Emails\AdminNotificationTemplate.html" />
+    <Content Include="Partials\Emails\EventNotificationTemplate.html" />
     <Content Include="Partials\Edit.html" />
+    <Content Include="Content\images\paytime-icon.png" />
     <Content Include="Partials\List.html" />
     <Content Include="scripts\ai.0.22.9-build00167.js" />
     <Content Include="scripts\ai.0.22.9-build00167.min.js" />
     <Content Include="scripts\bootstrap.js" />
     <Content Include="scripts\bootstrap.min.js" />
     <Content Include="Content\style\datetimepicker.css.map" />
-    <Content Include="PrivateSettings.config" />
+    <Content Include="PrivateSettings.config">
+      <SubType>Designer</SubType>
+    </Content>
     <None Include="scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="scripts\jquery-1.10.2.js" />
     <Content Include="scripts\jquery-1.10.2.min.js" />
@@ -269,6 +276,7 @@
     <Content Include="scripts\js\datetime-picker.js" />
     <Content Include="scripts\js\datetime-picker.min.js" />
     <Content Include="scripts\js\datetime-picker.tpls.js" />
+    <Content Include="scripts\js\menu.js" />
     <Content Include="scripts\modernizr-2.6.2.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -330,7 +338,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\images\" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />

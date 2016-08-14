@@ -7,7 +7,6 @@ angular.module("paytime")
         $scope.ajaxStatus = true;
         $scope.urlList = {};
         $scope.isAdmin = true;
-        $scope.TestFooter = "G";
         //$http.get("api/Identity/isAdmin")
         //    .then(function (response) {
         //        $scope.isAdmin = response;
@@ -38,20 +37,26 @@ angular.module("paytime")
     Add controller
 */
 angular.module("paytime")
-    .controller("AddController", ['$scope', '$http', function ($scope, $http) {
+    .controller("AddController", ['$scope', '$http', '$window', function ($scope, $http, $window) {
         $scope.pageType = "Add";
 
         $scope.title = "";
         $scope.shortDescription = "";
         $scope.longDescription = "";
         $scope.recurrenceRule = "";
-        $scope.startDate = new Date(new Date().toISOString().substring(0, new Date().toISOString().length - 1))
-        $scope.endDate = new Date(new Date().toISOString().substring(0, new Date().toISOString().length-1))
+        $scope.startDate = "";
+        $scope.endDate = "";
         $scope.reminderMode = "Mobile Only";
         $scope.submitStatus = {
             'display': false,
             'flag': true,
             'message': ""
+        };
+        $scope.getType = function (x) {
+            return typeof x;
+        };
+        $scope.isDate = function (x) {
+            return x instanceof Date;
         };
         $scope.isAdmin = true;
         //$http.get("api/Identity/isAdmin")
@@ -77,7 +82,7 @@ angular.module("paytime")
                     'LastModifiedOn': '',
                     'CreatedOn': ''
                 };
-                $http.post("/api/Events", $scope.postData)
+                $http.post("http://paytime.azurewebsites.net/api/Events", $scope.postData)
                     .then(function (response) {
                         //console.log(response);
                         //console.log("post done");
@@ -91,16 +96,17 @@ angular.module("paytime")
                         $scope.submitStatus.display = true;
                         $scope.submitStatus.flag = true;
                         $scope.submitStatus.message = "You have successfully added a new url mapping record.";
-                        $scope.uno.$setPristine();
-                        $scope.shortDescriptionInput.$setPristine();
-                        $scope.longDescriptionInput.$setPristine();
-                        $scope.startDateInput.$setPristine();
-                        $scope.endDateInput.$setPristine();
-                        $scope.recurrenceRuleInput.$setPristine();
+                        $window.location = "#/";
+                        //$scope.uno.$setPristine();
+                        //$scope.shortDescriptionInput.$setPristine();
+                        //$scope.longDescriptionInput.$setPristine();
+                        //$scope.startDateInput.$setPristine();
+                        //$scope.endDateInput.$setPristine();
+                        //$scope.recurrenceRuleInput.$setPristine();
 
                     },
                     function (error) {
-                        //console.log(error);
+                        console.log(error);
                         //console.log("error HERE");
                         $scope.submitStatus.display = true;
                         $scope.submitStatus.flag = false;
@@ -118,6 +124,23 @@ angular.module("paytime")
                 'message': ""
             };
         };
+
+        $scope.rRuleHelper = function (x) {
+            if (x == "daily")
+            {
+                $scope.recurrenceRule = "FREQ=DAILY";
+            }
+            if (x == "weekly") {
+                $scope.recurrenceRule = "FREQ=WEEKLY;BYDAY=MO,WE,FR";
+            }
+            if (x == "monthly") {
+                $scope.recurrenceRule = "FREQ=MONTHLY;INTERVAL=2;BYDAY=SU";
+            }
+            if (x == "yearly") {
+                $scope.recurrenceRule = "FREQ=YEARLY;WKST=MO;BYMONTH=3;BYMONTHDAY=3";
+            }
+        };
+
         $scope.isUnique = true;
         $scope.checkUnique = function (x) {
             ////console.log("at leasy here");
@@ -147,6 +170,7 @@ angular.module("paytime")
         $scope.longDescription = "";
         $scope.recurrenceRule = "";
         $scope.startDate = "";
+        $scope.str = "";
         $scope.endDate = "";
         $scope.reminderMode = "";
         $scope.urlList = {};
@@ -155,6 +179,12 @@ angular.module("paytime")
             'display': false,
             'flag': true,
             'message': ""
+        };
+        $scope.getType = function (x) {
+            return typeof x;
+        };
+        $scope.isDate = function (x) {
+            return x instanceof Date;
         };
         $scope.isAdmin = true;
         //$http.get("api/Identity/isAdmin")
@@ -176,6 +206,8 @@ angular.module("paytime")
                 $scope.longDescription = response.data.LongDescription;
                 $scope.recurrenceRule = response.data.RecurrenceRule;
                 $scope.startDate = response.data.StartDate;
+                //$scope.str = response.data.StartDate;
+                //$scope.obj = response.data.StartDate;
                 $scope.endDate = response.data.EndDate;
                 $scope.reminderMode = response.data.ReminderMode;
                 //angular.forEach($scope.urlList, function (todo) {
@@ -207,8 +239,8 @@ angular.module("paytime")
                         $scope.submitStatus.message = "There have been errors in deleting this url mapping. Maybe try again later?";
                     });
             }
-
         };
+
         $scope.addRecord = function (x) {
             if (x == $scope.pageType && $scope.isUnique == true && $scope.isAdmin) {
                 //console.log($scope.blocked);
@@ -246,6 +278,22 @@ angular.module("paytime")
                     });
             }
         };
+
+        $scope.rRuleHelper = function (x) {
+            if (x == "daily") {
+                $scope.recurrenceRule = "FREQ=DAILY";
+            }
+            if (x == "weekly") {
+                $scope.recurrenceRule = "FREQ=WEEKLY;BYDAY=MO,WE,FR";
+            }
+            if (x == "monthly") {
+                $scope.recurrenceRule = "FREQ=MONTHLY;INTERVAL=2;BYDAY=SU";
+            }
+            if (x == "yearly") {
+                $scope.recurrenceRule = "FREQ=YEARLY;WKST=MO;BYMONTH=3;BYMONTHDAY=3";
+            }
+        };
+
         $scope.stateChanged = function (x) {
             $scope.blocked = x;
         };

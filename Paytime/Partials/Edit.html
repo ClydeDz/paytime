@@ -1,72 +1,127 @@
-﻿<div>
-    <div class="form-group">
-        <div ng-class="submitStatus.flag ? 'alert alert-success alert-dismissible fade in' : 'alert alert-danger alert-dismissible fade in'" class="" role="alert" ng-show="submitStatus.display">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close" ng-click="closeSubmitStatusAlert()">
-                <span aria-hidden="true">&times;</span>
-            </button>
-            {{ submitStatus.message }}
-        </div>
-    </div>
+﻿<div style="margin-right:40px;">
+
     <div class="panel panel-default">
         <div class="panel-heading">
             <h3 class="panel-title">{{ pageType }}</h3>
         </div>
         <div class="panel-body">
             <form name="uno" novalidate>
-                <div class="form-group">
-                    <label for="shortUrl">Title</label>
-                    <input type="text" name="titleInput" class="form-control" id="title" placeholder="Title of the event" ng-model="title" ng-minlength="3" ng-maxlength="20" ng-required="true">
-                    <div ng-show="uno.titleInput.$touched && uno.titleInput.$invalid && !uno.titleInput.$pristine">
-                        <div class="text-danger text-muted">There seems to be an error with the short url you entered. Try something between 3 to 20 characters.</div>
+                <div class="row">
+                    <div class="col-xs-12 col-md-6">
+                        <div class="form-group">
+                            <label for="shortUrl">Title</label>
+                            <input type="text" name="titleInput" class="form-control" id="title" placeholder="Title of the event" ng-model="title" ng-minlength="3" ng-maxlength="20" ng-required="true">
+                            <div ng-show="uno.titleInput.$touched && uno.titleInput.$invalid && !uno.titleInput.$pristine">
+                                <div class="text-danger text-muted">This field is required. Try something between 3 to 20 characters.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-md-6">
+                        <div class="form-group">
+                            <label for="shortDescription">Short Description</label>
+                            <input type="text" name="shortDescriptionInput" class="form-control" id="shortDescription" placeholder="Short Description" ng-model="shortDescription" ng-minlength="3" ng-required="true">
+                            <div ng-show="uno.shortDescriptionInput.$touched && uno.shortDescriptionInput.$invalid && !uno.shortDescriptionInput.$pristine">
+                                <div class="text-danger text-muted">This field is required. Try something between 3 to 20 characters.</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label for="shortDescription">Short Description</label>
-                    <input type="text" name="shortDescriptionInput" class="form-control" id="shortDescription" placeholder="shortDescriptionInput" ng-model="shortDescription" ng-minlength="3"  ng-required="true">
-                    <div ng-show="uno.shortDescriptionInput.$touched && uno.shortDescriptionInput.$invalid && !uno.shortDescriptionInput.$pristine">
-                        <div class="text-danger text-muted">There seems to be an error with the short url you entered. Try something between 3 to 20 characters.</div>
+                <div class="row">
+                    <div class="col-xs-12 col-md-6">
+                        <div class="form-group">
+                            <label for="startDate">Start Date</label>
+                            <br />
+                            <input kendo-date-time-picker
+                                   ng-model="startDate"
+                                   k-ng-model="objstart"
+                                   data-k-format="'dd/MM/yyyy HH:mm'"
+                                   k-parse-formats="['dd-MM-yyyy HH:mm:ss']"
+                                   class="form-control"
+                                   ng-required="true" />
+                            <!--<input type="text" name="startDateInput" class="form-control" id="startDate" placeholder="dd-mm-yyyy hh:mm:ss am" ng-model="startDate" ng-minlength="3" ng-required="true">-->
+                            <div ng-show="uno.startDateInput.$touched && uno.startDateInput.$invalid && !uno.startDateInput.$pristine">
+                            <div class="text-danger text-muted">This field is required.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-md-6">
+                        <div class="form-group">
+                            <label for="endDate">End Date</label>
+                            <br />
+                            <input kendo-date-time-picker
+                                   ng-model="endDate"
+                                   k-ng-model="objend"
+                                   class="form-control"
+                                   data-k-format="'dd/MM/yyyy HH:mm'"
+                                   k-parse-formats="['yyyy-MM-dd HH:mm']" />
+                            <!--<input type="text" name="endDateInput" class="form-control" id="endDate" placeholder="endDateInput" ng-model="endDate" ng-minlength="3" ng-required="true">
+                            <div ng-show="uno.endDateInput.$touched && uno.endDateInput.$invalid && !uno.endDateInput.$pristine">
+                            <div class="text-danger text-muted">There seems to be an error with the long url you entered. Try something between 3 to 20 characters.</div>
+                            </div>-->
+                        </div>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label for="longDescription">long Description</label>
-                    <input type="text" name="longDescriptionInput" class="form-control" id="longDescription" placeholder="longDescriptionInput" ng-model="longDescription" ng-minlength="3"  ng-required="true">
-                    <div ng-show="uno.longDescriptionInput.$touched && uno.longDescriptionInput.$invalid && !uno.longDescriptionInput.$pristine">
-                        <div class="text-danger text-muted">There seems to be an error with the long url you entered. Try something between 3 to 20 characters.</div>
+
+                <div class="row">
+                    <div class="col-xs-12 col-md-12">
+                        <div class="form-group">
+                            <label for="longDescription">Long Description</label>
+                            <textarea name="longDescriptionInput" class="form-control" id="longDescription" placeholder="Long Description" ng-model="longDescription" ng-maxlength="250" style="max-width:850px; min-width:100px; resize:none;" rows="10"></textarea>
+                            <div ng-show="uno.longDescriptionInput.$touched && uno.longDescriptionInput.$invalid && !uno.longDescriptionInput.$pristine">
+                                <div class="text-danger text-muted">You can enter a maximum description of 250 characters.</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label for="startDate">Start Date</label>
-                    <input type="text" name="startDateInput" class="form-control" id="startDate" placeholder="startDateInput" ng-model="startDate" ng-minlength="3" ng-required="true">
-                    <div ng-show="uno.startDateInput.$touched && uno.startDateInput.$invalid && !uno.startDateInput.$pristine">
-                        <div class="text-danger text-muted">There seems to be an error with the long url you entered. Try something between 3 to 20 characters.</div>
+
+                <div class="row">
+                    <div class="col-xs-12 col-md-6">
+                        <div class="form-group">
+                            <label for="recurrenceRule">Recurrence Rule</label>
+                            <input type="text" name="recurrenceRuleInput" class="form-control" id="recurrenceRule" placeholder="Something like FREQ=DAILY" ng-model="recurrenceRule" ng-minlength="3" ng-required="true">
+                            <div ng-show="uno.recurrenceRuleInput.$touched && uno.recurrenceRuleInput.$invalid && !uno.recurrenceRuleInput.$pristine">
+                                <div class="text-danger text-muted">There seems to be an error with the long url you entered. Try something between 3 to 20 characters.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-md-6">
+                        <div class="form-group">
+                            <div class="alert alert-info">
+                                <strong><label for="recurrenceRule">Rule Templates</label></strong>
+                                <ul style="list-style-type:disc">
+                                    <li><a href="" ng-click="rRuleHelper('daily')" ng-disabled="!isAdmin">Every day</a></li>
+                                    <li><a href="" ng-click="rRuleHelper('weekly')" ng-disabled="!isAdmin">Every week on mon, wed and fri</a></li>
+                                    <li><a href="" ng-click="rRuleHelper('monthly')" ng-disabled="!isAdmin">Every 2 months on Sunday</a></li>
+                                    <li><a href="" ng-click="rRuleHelper('yearly')" ng-disabled="!isAdmin">Every March on the 3rd</a></li>
+                                    <li><a href="https://jkbrzt.github.io/rrule/" title="Construct more rules here">Construct more rules here</a></li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label for="endDate">End Date</label>
-                    <input type="text" name="endDateInput" class="form-control" id="endDate" placeholder="endDateInput" ng-model="endDate" ng-minlength="3" ng-required="true">
-                    <div ng-show="uno.endDateInput.$touched && uno.endDateInput.$invalid && !uno.endDateInput.$pristine">
-                        <div class="text-danger text-muted">There seems to be an error with the long url you entered. Try something between 3 to 20 characters.</div>
+                
+                <div class="row">
+                    <div class="col-xs-12 col-md-12">
+                        <div class="form-group">
+                            <label class="radio-inline"><input type="radio" name="reminderMode" ng-model="reminderMode" value="Mobile Only">Mobile Only</label>
+                            <label class="radio-inline"><input type="radio" name="reminderMode" ng-model="reminderMode" value="Email Only">Email Only</label>
+                            <label class="radio-inline"><input type="radio" name="reminderMode" ng-model="reminderMode" value="Mobile and Email">Mobile and Email</label>
+                        </div>
                     </div>
                 </div>
+
                 <div class="form-group">
-                    <label for="recurrenceRule">Recurrence Rule</label>
-                    <input type="text" name="recurrenceRuleInput" class="form-control" id="recurrenceRule" placeholder="recurrenceRuleInput" ng-model="recurrenceRule" ng-minlength="3" ng-required="true">
-                    <div ng-show="uno.recurrenceRuleInput.$touched && uno.recurrenceRuleInput.$invalid && !uno.recurrenceRuleInput.$pristine">
-                        <div class="text-danger text-muted">There seems to be an error with the long url you entered. Try something between 3 to 20 characters.</div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="radio-inline"><input type="radio" name="reminderMode" ng-model="reminderMode" value="Mobile Only">Mobile Only</label>
-                    <label class="radio-inline"><input type="radio" name="reminderMode" ng-model="reminderMode" value="Email Only">Email Only</label>
-                    <label class="radio-inline"><input type="radio" name="reminderMode" ng-model="reminderMode" value="Mobile and Email">Mobile and Email</label> 
-                </div>
-                <!--<div ng-show="uno.$invalid && !uno.$pristine">
-                    <div class="text-danger text-muted">There seems to be an error with the long url you entered. Try something between 3 to 20 characters.</div>
-                </div>-->
-                <div class="form-group">
-                    <button type="submit" class="btn btn-success" ng-click="addRecord(pageType)" ng-disabled="uno.$invalid || !isAdmin"><i class="ion-ios-compose-outline"></i>&nbsp;{{ pageType }}</button>
+                    <button type="submit" class="btn btn-success" ng-click="addRecord(pageType)" ng-disabled="uno.$invalid || !isAdmin"><i class="ion-ios-bolt-outline"></i>&nbsp;{{ pageType=='Add' ? pageType:'Save' }}</button>
                 </div>
             </form>
+        </div>
+    </div>
+    <div class="form-group">
+        <div ng-class="submitStatus.flag ? 'alert alert-success alert-dismissible fade in' : 'alert alert-danger alert-dismissible fade in'" class="" role="alert" ng-show="submitStatus.display">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close" ng-click="closeSubmitStatusAlert()">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            {{ submitStatus.message }}
         </div>
     </div>
     <div ng-show="pageType==='Edit'">
